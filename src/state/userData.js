@@ -1,6 +1,3 @@
-
-
-
 const TEXT_CHANGE = 'userData/TEXT_CHANGE'
 
 
