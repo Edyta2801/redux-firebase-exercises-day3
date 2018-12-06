@@ -1,38 +1,21 @@
 import React from 'react'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 
-import { auth, googleProvider } from '../firebaseConfig'
-
 import Forms from './Forms'
 
 import { connect } from 'react-redux'
-import { initAuthChangeListeningAsyncAction, logOutAsyncAction, logInByGoogleAsyncAction, logInByClickAsyncAction } from '../State/auth'
+import {
+  initAuthChangeListeningAsyncAction,
+  logOutAsyncAction,
+  logInByGoogleAsyncAction,
+  logInAsyncAction,
+  emailChangeAction,
+  passwordChangeAction
+} from '../state/auth'
 
 class Auth extends React.Component {
-  state = {
-    email: '',
-    password: ''
-  }
-
   componentDidMount() {
     this.props._initAuthChangeListeningAsyncAction()
-  }
-
-  onEmailChangeHandler = event => {
-    this.setState({ email: event.target.value })
-  }
-  onPasswordChangeHandler = event => {
-    this.setState({ password: event.target.value })
-  }
-
-  onLogInClick = () => {
-    this.props._logInByClickAsyncAction(this.state.email, this.state.password)
-  }
-
-
-
-  onLogOutClickHandler = () => {
-    auth.signOut()
   }
 
   render() {
@@ -57,29 +40,29 @@ class Auth extends React.Component {
         :
         <Forms
           email={this.props._email}
-          onEmailChangeHandler={this.onEmailChangeHandler}
+          onEmailChangeHandler={this.props._emailChangeAction}
           password={this.props._password}
-          onPasswordChangeHandler={this.onPasswordChangeHandler}
-          onLogInClick={this.onLogInClick}
+          onPasswordChangeHandler={this.props._passwordChangeAction}
+          onLogInClick={this.props._logInAsyncAction}
           onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
         />
     )
   }
 }
 
-
 const mapStateToProps = state => ({
   _isUserLoggedIn: state.auth.isUserLoggedIn,
-  _email:state.auth.email,
-  _password:state.auth.email
+  _email: state.auth.email,
+  _password: state.auth.password
 })
 
 const mapDispatchToProps = dispatch => ({
   _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
   _logOutAsyncAction: () => dispatch(logOutAsyncAction()),
   _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
-  _logInByClickAsyncAction: (email, password) => dispatch(logInByClickAsyncAction(email, password))
-
+  _logInAsyncAction: () => dispatch(logInAsyncAction()),
+  _emailChangeAction: (event) => dispatch(emailChangeAction(event.target.value)),
+  _passwordChangeAction: (event) => dispatch(passwordChangeAction(event.target.value)),
 })
 
 export default connect(
