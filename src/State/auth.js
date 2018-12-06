@@ -5,7 +5,7 @@ const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
 
 
-export const initAuthChangeListeningAction = () => (dispatch, getState) => {
+export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => {
     auth.onAuthStateChanged(
         // user is an obj with users data or null when not logged in
         user => {
@@ -18,7 +18,9 @@ export const initAuthChangeListeningAction = () => (dispatch, getState) => {
     )
 }
 
-
+export const logOutAsyncAction=()=>(dispatch, getState)=>{
+   auth.signOut()
+}
 
 
 
@@ -45,7 +47,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 isUserLoggedIn: true
             }
-        case LOG_IN:
+        case LOG_OUT:
             return {
                 ...state,
                 isUserLoggedIn: false

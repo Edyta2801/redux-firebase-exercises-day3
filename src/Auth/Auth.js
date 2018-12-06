@@ -6,7 +6,7 @@ import { auth, googleProvider } from '../firebaseConfig'
 import Forms from './Forms'
 
 import { connect } from 'react-redux'
-import { initAuthChangeListeningAction } from '../State/auth'
+import { initAuthChangeListeningAsyncAction, logOutAsyncAction } from '../State/auth'
 
 class Auth extends React.Component {
   state = {
@@ -15,7 +15,7 @@ class Auth extends React.Component {
   }
 
   componentDidMount() {
-    this.props._initAuthChangeListeningAction()
+    this.props._initAuthChangeListeningAsyncAction()
   }
 
   onEmailChangeHandler = event => {
@@ -54,7 +54,7 @@ class Auth extends React.Component {
               color: 'white'
             }}
             secondary={true}
-            onClick={this.onLogOutClickHandler}
+            onClick={this.props._logOutAsyncAction}
           >
             X
           </FloatingActionButton>
@@ -78,7 +78,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  _initAuthChangeListeningAction: () => dispatch(initAuthChangeListeningAction())
+  _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
+  _logOutAsyncAction:()=>dispatch(logOutAsyncAction())
 })
 
 export default connect(
