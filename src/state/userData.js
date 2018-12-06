@@ -1,20 +1,20 @@
-cconst TEXT_CHANGE = 'userData/TEXT_CHANGE'
+const TEXT_CHANGE = 'userData/TEXT_CHANGE'
 export const textChangeAction = newTextValue => ({
- type: TEXT_CHANGE,
- newTextValue
+    type: TEXT_CHANGE,
+    newTextValue
 })
 const INITIAL_STATE = {
- text: ''
+    text: ''
 }
 export default (state = INITIAL_STATE, action) => {
- switch (action.type) {
-   case TEXT_CHANGE:
-     return {
-       ...state,
-       text: action.newTextValue
-     }
-   default:
-     return state
- }
-} 
+    switch (action.type) {
+        case TEXT_CHANGE:
+            return {
+                ...state,
+                text: action.newTextValue
+            }
+        default:
+            return state
+    }
+}
 
