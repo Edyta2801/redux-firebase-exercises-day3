@@ -9,8 +9,9 @@ export const textChangeAction = newTextValue => ({
 
 export const saveTextToDbAsyncAction = () => (dispatch, getState) => {
   const text = getState().userData.text
+  const uuid = getState().auth.user.uid
 
-  database.ref('jfddl6/users').set({
+  database.ref(`jfddl6/users/${uuid}`).set({
     text
   })
 }
