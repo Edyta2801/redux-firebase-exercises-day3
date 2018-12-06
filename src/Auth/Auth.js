@@ -5,6 +5,8 @@ import { auth, googleProvider } from '../firebaseConfig'
 
 import Forms from './Forms'
 
+
+
 class Auth extends React.Component {
   state = {
     email: '',
