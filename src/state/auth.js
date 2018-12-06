@@ -9,7 +9,7 @@ export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => 
   auth.onAuthStateChanged(
     user => {
       if (user) {
-        dispatch(logInAction())
+        dispatch(logInAction(user))
         dispatch(saveLogInTimestampAsyncAction())
       } else {
         dispatch(logOutAction())
@@ -39,13 +39,16 @@ export const logInAsyncAction = () => (dispatch, getState) => {
     })
 }
 
-const saveLogInTimestampAsyncAction=()=>(dispatch, getState)=>{
+const saveLogInTimestampAsyncAction = () => (dispatch, getState) => {
   database.ref('loginsLogs').push({
-    timestamp:Date.now()
+    timestamp: Date.now()
   })
 }
 
-const logInAction = () => ({ type: LOG_IN })
+const logInAction = user => ({ 
+  type: LOG_IN,
+  user
+})
 const logOutAction = () => ({ type: LOG_OUT })
 
 export const emailChangeAction = newValue => ({
@@ -60,7 +63,8 @@ export const passwordChangeAction = newValue => ({
 const INITIAL_STATE = {
   isUserLoggedIn: false,
   email: '',
-  password: ''
+  password: '',
+  user: null
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -68,12 +72,14 @@ export default (state = INITIAL_STATE, action) => {
     case LOG_IN:
       return {
         ...state,
-        isUserLoggedIn: true
+        isUserLoggedIn: true,
+        user: action.user
       }
     case LOG_OUT:
       return {
         ...state,
-        isUserLoggedIn: false
+        isUserLoggedIn: false,
+        user: null
       }
     case EMAIL_CHANGE:
       return {
@@ -89,4 +95,3 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
-
