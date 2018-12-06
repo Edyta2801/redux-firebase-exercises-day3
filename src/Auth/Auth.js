@@ -6,7 +6,7 @@ import { auth, googleProvider } from '../firebaseConfig'
 import Forms from './Forms'
 
 import { connect } from 'react-redux'
-import { initAuthChangeListeningAsyncAction, logOutAsyncAction, logInByGoogleAsyncAction } from '../State/auth'
+import { initAuthChangeListeningAsyncAction, logOutAsyncAction, logInByGoogleAsyncAction, logInByClickAsyncAction } from '../State/auth'
 
 class Auth extends React.Component {
   state = {
@@ -26,11 +26,7 @@ class Auth extends React.Component {
   }
 
   onLogInClick = () => {
-    auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-      .catch(error => {
-        alert('Something is wrong! Check console for error details!')
-        console.log(error)
-      })
+    this.props._logInByClickAsyncAction(this.state.email, this.state.password)
   }
 
 
@@ -71,6 +67,7 @@ class Auth extends React.Component {
   }
 }
 
+
 const mapStateToProps = state => ({
   _isUserLoggedIn: state.auth.isUserLoggedIn
 })
@@ -78,7 +75,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
   _logOutAsyncAction: () => dispatch(logOutAsyncAction()),
-  _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction())
+  _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction()),
+  _logInByClickAsyncAction: (email, password) => dispatch(logInByClickAsyncAction(email, password))
 
 })
 

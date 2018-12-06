@@ -18,13 +18,21 @@ export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => 
     )
 }
 
-export const logOutAsyncAction=()=>(dispatch, getState)=>{
-   auth.signOut()
+export const logOutAsyncAction = () => (dispatch, getState) => {
+    auth.signOut()
 }
 
-export const logInByGoogleAsyncAction = () =>(dispatch, getState)=>{
+export const logInByGoogleAsyncAction = () => (dispatch, getState) => {
     auth.signInWithPopup(googleProvider)
-  }
+}
+
+export const logInByClickAsyncAction = (email, password) => (dispatch, getState) => {
+    auth.signInWithEmailAndPassword(email,password)
+        .catch(error => {
+            alert('Something is wrong! Check console for error details!')
+            console.log(error)
+        })
+}
 
 
 
