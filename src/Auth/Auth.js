@@ -6,7 +6,7 @@ import { auth, googleProvider } from '../firebaseConfig'
 import Forms from './Forms'
 
 import { connect } from 'react-redux'
-import { initAuthChangeListeningAsyncAction, logOutAsyncAction } from '../State/auth'
+import { initAuthChangeListeningAsyncAction, logOutAsyncAction, logInByGoogleAsyncAction } from '../State/auth'
 
 class Auth extends React.Component {
   state = {
@@ -33,9 +33,7 @@ class Auth extends React.Component {
       })
   }
 
-  onLogInByGoogleClick = () => {
-    auth.signInWithPopup(googleProvider)
-  }
+
 
   onLogOutClickHandler = () => {
     auth.signOut()
@@ -67,7 +65,7 @@ class Auth extends React.Component {
           password={this.state.password}
           onPasswordChangeHandler={this.onPasswordChangeHandler}
           onLogInClick={this.onLogInClick}
-          onLogInByGoogleClick={this.onLogInByGoogleClick}
+          onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
         />
     )
   }
@@ -79,7 +77,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   _initAuthChangeListeningAsyncAction: () => dispatch(initAuthChangeListeningAsyncAction()),
-  _logOutAsyncAction:()=>dispatch(logOutAsyncAction())
+  _logOutAsyncAction: () => dispatch(logOutAsyncAction()),
+  _logInByGoogleAsyncAction: () => dispatch(logInByGoogleAsyncAction())
+
 })
 
 export default connect(
