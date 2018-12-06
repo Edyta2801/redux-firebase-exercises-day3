@@ -52,7 +52,7 @@ class Auth extends React.Component {
 
   render() {
     return (
-      this.state.isUserLoggedIn ?
+      this.state._isUserLoggedIn ?
         <div>
           <FloatingActionButton
             style={{
@@ -81,4 +81,16 @@ class Auth extends React.Component {
     )
   }
 }
-export default Auth
+
+
+mapStateToProps=state=>({
+  _isUserLoggedIn:state.auth.isUserLoggedIn
+})
+
+
+
+
+
+export default connect(
+  mapStateToProps
+  (Auth))
