@@ -3,7 +3,8 @@ import { auth, googleProvider } from '../firebaseConfig'
 
 const LOG_IN = 'auth/LOG_IN'
 const LOG_OUT = 'auth/LOG_OUT'
-
+const EMAIL_CHANGE='auth/EMAIL_CHANGE'
+const PASSWORD_CHANGE='auth/PASSWORD_CHANGE'
 
 export const initAuthChangeListeningAsyncAction = () => (dispatch, getState) => {
     auth.onAuthStateChanged(
@@ -44,6 +45,15 @@ const logOutAction = () => ({
     type: LOG_OUT
 })
 
+export const emailChangeAction = value => ({
+    type: EMAIL_CHANGE ,
+    value
+})
+
+export const passwordChangeAction = value => ({
+    type: PASSWORD_CHANGE,
+    value
+})
 
 
 
