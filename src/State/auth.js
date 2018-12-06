@@ -10,7 +10,7 @@ export const initAuthChangeListeningAction = () => (dispatch, getState) => {
         // user is an obj with users data or null when not logged in
         user => {
             if (user) {
-
+                dispatch(logInAction())
             } else {
                 dispatch(logOutAction())
             }
