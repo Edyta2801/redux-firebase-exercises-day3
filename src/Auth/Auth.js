@@ -56,9 +56,9 @@ class Auth extends React.Component {
         </div>
         :
         <Forms
-          email={this.state.email}
+          email={this.props._email}
           onEmailChangeHandler={this.onEmailChangeHandler}
-          password={this.state.password}
+          password={this.props._password}
           onPasswordChangeHandler={this.onPasswordChangeHandler}
           onLogInClick={this.onLogInClick}
           onLogInByGoogleClick={this.props._logInByGoogleAsyncAction}
@@ -69,7 +69,9 @@ class Auth extends React.Component {
 
 
 const mapStateToProps = state => ({
-  _isUserLoggedIn: state.auth.isUserLoggedIn
+  _isUserLoggedIn: state.auth.isUserLoggedIn,
+  _email:state.auth.email,
+  _password:state.auth.email
 })
 
 const mapDispatchToProps = dispatch => ({

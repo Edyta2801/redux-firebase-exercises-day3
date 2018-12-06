@@ -27,7 +27,7 @@ export const logInByGoogleAsyncAction = () => (dispatch, getState) => {
 }
 
 export const logInByClickAsyncAction = (email, password) => (dispatch, getState) => {
-    auth.signInWithEmailAndPassword(email,password)
+    auth.signInWithEmailAndPassword(email, password)
         .catch(error => {
             alert('Something is wrong! Check console for error details!')
             console.log(error)
@@ -47,7 +47,11 @@ const logOutAction = () => ({
 
 
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+    isUserLogIn: false,
+    email: 'dupa',
+    password: 'dupa'
+}
 
 
 export default (state = INITIAL_STATE, action) => {
